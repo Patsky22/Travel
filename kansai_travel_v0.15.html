@@ -74,6 +74,8 @@
       scroll-behavior: smooth;
       -webkit-text-size-adjust: 100%;
       text-size-adjust: 100%;
+      max-width: 100%;
+      overflow-x: hidden;
     }
 
     body {
@@ -99,9 +101,54 @@
     }
 
     .app {
-      width: min(1180px, 100%);
+      width: 100%;
+      max-width: 1180px;
       margin: 0 auto;
       padding: 18px 14px 48px;
+    }
+
+    .app,
+    .hero,
+    .toolbar,
+    .summary,
+    .block-card,
+    .block-head,
+    .block-body,
+    .block-title-line,
+    .block-plan,
+    .info-box,
+    .spot-list,
+    .spot-card,
+    .spot-content,
+    .spot-grid,
+    .spot-info,
+    .route-options,
+    .route-card,
+    .route-line,
+    .selected-output,
+    .source {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    p,
+    .chip,
+    .tag,
+    .role,
+    .difficulty,
+    .block-summary,
+    .spot-meta,
+    .info-box,
+    .spot-info,
+    .route-fit,
+    .route-node,
+    .selected-output,
+    .source {
+      overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
     .hero,
@@ -739,22 +786,58 @@
 
     @media (max-width: 480px) {
       .app {
-        padding: 10px max(8px, env(safe-area-inset-left)) 36px max(8px, env(safe-area-inset-right));
+        padding: 8px max(6px, env(safe-area-inset-left)) 28px max(6px, env(safe-area-inset-right));
       }
 
       body {
-        font-size: 15px;
+        font-size: 13.5px;
+        line-height: 1.42;
       }
 
       .hero,
+      .toolbar,
+      .summary,
       .block-head,
       .block-body,
       .spot-content {
-        padding: 12px;
+        padding: 10px;
+      }
+
+      .hero,
+      .toolbar,
+      .summary {
+        margin-bottom: 10px;
+      }
+
+      .list {
+        gap: 12px;
+      }
+
+      .spot-list {
+        gap: 10px;
+      }
+
+      .block-plan,
+      .spot-grid,
+      .route-options {
+        gap: 6px;
+      }
+
+      h1 {
+        font-size: 1.45rem;
+      }
+
+      .block-head h2 {
+        font-size: 1.18rem;
+      }
+
+      .spot-card h3 {
+        font-size: 1.05rem;
       }
 
       .subtitle {
-        font-size: 0.92rem;
+        font-size: 0.84rem;
+        margin-bottom: 10px;
       }
 
       .chip,
@@ -762,7 +845,40 @@
       .role,
       .difficulty,
       .route-node {
-        font-size: 0.78rem;
+        max-width: 100%;
+        padding: 4px 8px;
+        font-size: 0.72rem;
+        line-height: 1.3;
+        white-space: normal;
+      }
+
+      .info-label,
+      .spot-info strong {
+        font-size: 0.72rem;
+      }
+
+      .spot-meta,
+      .route-fit,
+      .source {
+        font-size: 0.82rem;
+      }
+
+      .info-box,
+      .spot-info,
+      .route-card {
+        padding: 8px;
+      }
+
+      .link-button,
+      .button,
+      .field,
+      .status-select {
+        font-size: 0.82rem;
+      }
+
+      .link-button {
+        min-height: 34px;
+        padding: 0 9px;
       }
 
       .spot-gallery,
@@ -772,14 +888,47 @@
       .spot-image,
       .spot-image img,
       .image-fallback {
-        height: 220px;
+        height: 180px;
         min-height: 0;
       }
 
-      .route-card,
-      .info-box,
-      .spot-info {
-        padding: 10px;
+      .gallery-nav {
+        width: 32px;
+        height: 32px;
+      }
+
+      .route-line {
+        flex-wrap: wrap;
+        overflow-x: visible;
+        gap: 6px;
+        padding: 4px 0 6px;
+        scrollbar-width: none;
+      }
+
+      .route-node {
+        flex: 1 1 auto;
+        min-width: 0;
+      }
+
+      .note-box {
+        min-height: 60px;
+        padding: 8px;
+      }
+    }
+
+    @media (max-width: 390px) {
+      body {
+        font-size: 13px;
+      }
+
+      .spot-gallery,
+      .gallery-track,
+      .gallery-slide,
+      .gallery-slide img,
+      .spot-image,
+      .spot-image img,
+      .image-fallback {
+        height: 168px;
       }
     }
   </style>
