@@ -110,7 +110,6 @@
     .app,
     .hero,
     .toolbar,
-    .summary,
     .block-card,
     .block-head,
     .block-body,
@@ -125,7 +124,6 @@
     .route-options,
     .route-card,
     .route-line,
-    .selected-output,
     .source {
       min-width: 0;
       max-width: 100%;
@@ -135,17 +133,14 @@
     h2,
     h3,
     p,
-    .chip,
     .tag,
     .role,
-    .difficulty,
     .block-summary,
     .spot-meta,
     .info-box,
     .spot-info,
     .route-fit,
     .route-node,
-    .selected-output,
     .source {
       overflow-wrap: anywhere;
       word-break: break-word;
@@ -153,7 +148,6 @@
 
     .hero,
     .toolbar,
-    .summary,
     .block-card {
       background: var(--cp-surface);
       border: 1px solid var(--cp-border);
@@ -193,19 +187,15 @@
       font-size: 1rem;
     }
 
-    .chips,
     .block-tags,
-    .actions,
     .jump-list {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
     }
 
-    .chip,
     .tag,
-    .role,
-    .difficulty {
+    .role {
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -219,8 +209,7 @@
       white-space: nowrap;
     }
 
-    .toolbar,
-    .summary {
+    .toolbar {
       padding: 12px;
       margin-bottom: 14px;
     }
@@ -232,9 +221,7 @@
     }
 
     .field,
-    .button,
-    .status-select,
-    .note-box {
+    .button {
       border: 1px solid var(--cp-border);
       border-radius: 0.625rem;
       background: var(--cp-surface);
@@ -242,8 +229,7 @@
       font: inherit;
     }
 
-    .field,
-    .status-select {
+    .field {
       min-height: 44px;
       padding: 0 12px;
     }
@@ -263,19 +249,6 @@
 
     .button.secondary {
       background: var(--cp-surface-soft);
-    }
-
-    .summary-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 10px;
-    }
-
-    .selected-output {
-      color: var(--cp-text-muted);
-      white-space: pre-wrap;
-      font-size: 0.92rem;
     }
 
     .jump-list {
@@ -332,12 +305,6 @@
     .block-summary {
       color: var(--cp-text-muted);
       margin: 0 0 12px;
-    }
-
-    .block-controls {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
     }
 
     .block-body {
@@ -445,6 +412,8 @@
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
+      margin: 20px 0 4px;
+      padding-top: 8px;
     }
 
     .link-button {
@@ -464,13 +433,6 @@
       background: var(--cp-accent);
       border-color: var(--cp-accent);
       color: var(--cp-accent-fg);
-    }
-
-    .note-box {
-      min-height: 72px;
-      width: 100%;
-      padding: 10px 12px;
-      resize: vertical;
     }
 
     .empty {
@@ -752,14 +714,10 @@
       }
 
       .control-grid {
-        grid-template-columns: 1.4fr 0.8fr 0.8fr;
+        grid-template-columns: 1.4fr 0.8fr;
       }
 
       .block-title-line {
-        grid-template-columns: 1fr 240px;
-      }
-
-      .block-controls {
         grid-template-columns: 1fr;
       }
 
@@ -796,7 +754,6 @@
 
       .hero,
       .toolbar,
-      .summary,
       .block-head,
       .block-body,
       .spot-content {
@@ -804,8 +761,7 @@
       }
 
       .hero,
-      .toolbar,
-      .summary {
+      .toolbar {
         margin-bottom: 10px;
       }
 
@@ -840,10 +796,8 @@
         margin-bottom: 10px;
       }
 
-      .chip,
       .tag,
       .role,
-      .difficulty,
       .route-node {
         max-width: 100%;
         padding: 4px 8px;
@@ -871,14 +825,18 @@
 
       .link-button,
       .button,
-      .field,
-      .status-select {
+      .field {
         font-size: 0.82rem;
       }
 
       .link-button {
         min-height: 34px;
         padding: 0 9px;
+      }
+
+      .mini-actions {
+        margin: 20px 0 6px;
+        padding-top: 8px;
       }
 
       .spot-gallery,
@@ -910,10 +868,6 @@
         min-width: 0;
       }
 
-      .note-box {
-        min-height: 60px;
-        padding: 8px;
-      }
     }
 
     @media (max-width: 390px) {
@@ -938,15 +892,6 @@
     <section id="topNav" class="hero">
       <div class="eyebrow">Kansai block-based guide</div>
       <h1>关西出游 <span class="version">v0.15</span></h1>
-      <p class="subtitle">
-        按 10 个大板块重新整理，顶部导航可展开跳到每个小景点；每个小景点单独配 10 张图片，并保留看点、交通、停留、季节、票价和心得。
-      </p>
-      <div class="chips">
-        <span class="chip">区域板块：<strong id="totalBlocks">10</strong></span>
-        <span class="chip">小景点：<strong id="totalSpots">36</strong></span>
-        <span class="chip">保留：<strong id="keepCount">0</strong></span>
-        <span class="chip">版本：v0.15</span>
-      </div>
       <nav id="jumpList" class="jump-list" aria-label="区域跳转"></nav>
     </section>
 
@@ -956,23 +901,7 @@
         <select id="regionFilter" class="field" aria-label="按区域筛选">
           <option value="">全部区域</option>
         </select>
-        <select id="statusFilter" class="field" aria-label="按筛选状态筛选">
-          <option value="">全部状态</option>
-          <option value="keep">保留</option>
-          <option value="maybe">备选</option>
-          <option value="drop">放弃</option>
-          <option value="unset">未定</option>
-        </select>
       </div>
-    </section>
-
-    <section class="summary">
-      <div class="summary-actions">
-        <button id="copyKeepButton" class="button primary" type="button">复制保留板块</button>
-        <button id="copyAllButton" class="button secondary" type="button">复制全部板块</button>
-        <button id="resetButton" class="button secondary" type="button">重置筛选</button>
-      </div>
-      <div id="selectedOutput" class="selected-output">还没有标记“保留”。</div>
     </section>
 
     <section id="list" class="list" aria-label="区域板块列表"></section>
@@ -2372,21 +2301,11 @@
       }
 ];
 
-    const storageKey = "kansai-area-blocks-v0.15";
-    const noteKey = "kansai-area-block-notes-v0.15";
     const spotById = new Map(blocks.flatMap((block) => block.spots.map((spot) => [spot.id, spot])));
-    const statuses = new Map(Object.entries(JSON.parse(localStorage.getItem(storageKey) || "{}")));
-    const notes = new Map(Object.entries(JSON.parse(localStorage.getItem(noteKey) || "{}")));
 
     const list = document.getElementById("list");
     const searchInput = document.getElementById("searchInput");
     const regionFilter = document.getElementById("regionFilter");
-    const statusFilter = document.getElementById("statusFilter");
-    const keepCount = document.getElementById("keepCount");
-    const selectedOutput = document.getElementById("selectedOutput");
-    const copyKeepButton = document.getElementById("copyKeepButton");
-    const copyAllButton = document.getElementById("copyAllButton");
-    const resetButton = document.getElementById("resetButton");
     const jumpList = document.getElementById("jumpList");
     const imageViewer = document.getElementById("imageViewer");
     const imageViewerImage = document.getElementById("imageViewerImage");
@@ -2399,9 +2318,6 @@
     let viewerIndex = 0;
 
     function init() {
-      document.getElementById("totalBlocks").textContent = blocks.length;
-      document.getElementById("totalSpots").textContent = blocks.reduce((sum, block) => sum + block.spots.length, 0);
-
       [...new Set(blocks.map((block) => block.region))].sort().forEach((region) => {
         const option = document.createElement("option");
         option.value = region;
@@ -2423,23 +2339,14 @@
     function render() {
       const keyword = searchInput.value.trim().toLowerCase();
       const region = regionFilter.value;
-      const status = statusFilter.value;
       const visible = blocks.filter((block) => {
-        const current = statuses.get(block.id) || "unset";
         const spotText = block.spots.map((spot) => `${spot.name} ${spot.type} ${spot.highlights} ${spot.route}`).join(" ");
         const text = `${block.title} ${block.region} ${block.summary} ${block.route} ${block.note} ${spotText}`.toLowerCase();
         return (!keyword || text.includes(keyword)) &&
-          (!region || block.region === region) &&
-          (!status || current === status);
+          (!region || block.region === region);
       });
 
       list.innerHTML = visible.length ? visible.map(blockHtml).join("") : '<div class="empty">没有匹配的区域板块。</div>';
-      list.querySelectorAll(".status-select").forEach((select) => {
-        select.addEventListener("change", () => setStatus(select.dataset.id, select.value));
-      });
-      list.querySelectorAll(".note-box").forEach((textarea) => {
-        textarea.addEventListener("input", () => setNote(textarea.dataset.id, textarea.value));
-      });
       list.querySelectorAll(".gallery-nav").forEach((button) => {
         button.addEventListener("click", () => scrollGallery(button.dataset.gallery, Number(button.dataset.direction)));
       });
@@ -2455,12 +2362,9 @@
           }
         });
       });
-      renderSummary();
     }
 
     function blockHtml(block, index) {
-      const current = statuses.get(block.id) || "unset";
-      const note = notes.get(block.id) || "";
       return `
         <article id="${block.id}" class="block-card">
           <header class="block-head">
@@ -2468,22 +2372,12 @@
               <div>
                 <div class="block-index">Block ${index + 1} · ${escapeHtml(block.region)}</div>
                 <h2>${escapeHtml(block.title)}</h2>
-                <a class="back-link" href="#topNav">↑ 回到导航</a>
+                <a class="back-link" href="#topNav">↑ 回到列表</a>
                 <p class="block-summary">${escapeHtml(block.summary)}</p>
                 <div class="block-tags">
                   <span class="tag">${escapeHtml(block.time)}</span>
                   <span class="tag">${escapeHtml(block.difficulty)}</span>
-                  <span class="tag">${block.spots.length} 个小景点</span>
                 </div>
-              </div>
-              <div class="block-controls">
-                <select class="status-select" data-id="${block.id}" aria-label="${escapeHtml(block.title)} 筛选状态">
-                  <option value="unset" ${current === "unset" ? "selected" : ""}>未定</option>
-                  <option value="keep" ${current === "keep" ? "selected" : ""}>保留</option>
-                  <option value="maybe" ${current === "maybe" ? "selected" : ""}>备选</option>
-                  <option value="drop" ${current === "drop" ? "selected" : ""}>放弃</option>
-                </select>
-                <span class="difficulty">${statusText(current)}</span>
               </div>
             </div>
           </header>
@@ -2498,7 +2392,6 @@
             <div class="spot-list">
               ${block.spots.map(spotHtml).join("")}
             </div>
-            <textarea class="note-box" data-id="${block.id}" placeholder="写这个区域板块的备注：想去顺序、是否保留、交通担心点...">${escapeHtml(note)}</textarea>
           </div>
         </article>
       `;
@@ -2516,7 +2409,7 @@
               </div>
               <div class="spot-title-actions">
                 <span class="role">${escapeHtml(spot.role)}</span>
-                <a class="mini-up" href="#topNav">↑ 导航</a>
+                <a class="mini-up" href="#topNav">↑ 列表</a>
               </div>
             </div>
             <div class="spot-grid">
@@ -2556,7 +2449,7 @@
               </div>
               <div class="route-actions">
                 <a class="link-button map" href="${route.google}" target="_blank" rel="noopener noreferrer">打开 Google Maps 路线</a>
-                <a class="mini-up" href="#topNav">↑ 导航</a>
+                <a class="mini-up" href="#topNav">↑ 列表</a>
               </div>
             </article>
           `).join("")}
@@ -2642,56 +2535,6 @@
       return `<div class="spot-info"><strong>${label}</strong><p>${escapeHtml(value)}</p></div>`;
     }
 
-    function setStatus(id, value) {
-      statuses.set(id, value);
-      localStorage.setItem(storageKey, JSON.stringify(Object.fromEntries(statuses)));
-      render();
-    }
-
-    function setNote(id, value) {
-      notes.set(id, value);
-      localStorage.setItem(noteKey, JSON.stringify(Object.fromEntries(notes)));
-      renderSummary();
-    }
-
-    function renderSummary() {
-      const kept = blocks.filter((block) => (statuses.get(block.id) || "unset") === "keep");
-      keepCount.textContent = kept.length;
-      selectedOutput.textContent = kept.length
-        ? kept.map((block) => `保留：${block.title}\n小景点：${block.spots.map((spot) => spot.name).join("、")}\n备注：${notes.get(block.id) || "无"}`).join("\n\n")
-        : "还没有标记“保留”。";
-    }
-
-    function copyBlocks(mode) {
-      const target = mode === "keep"
-        ? blocks.filter((block) => (statuses.get(block.id) || "unset") === "keep")
-        : blocks;
-      const text = target.map((block) => {
-        const status = statusText(statuses.get(block.id) || "unset");
-        return `${status}｜${block.title}\n小景点：${block.spots.map((spot) => `${spot.name}（${spot.role}）`).join("、")}\n建议：${block.route}\n预算：${block.budget}\n备注：${notes.get(block.id) || "无"}`;
-      }).join("\n\n");
-      navigator.clipboard.writeText(text || "无").then(() => {
-        selectedOutput.textContent = text || "没有可复制内容。";
-      });
-    }
-
-    function resetAll() {
-      statuses.clear();
-      notes.clear();
-      localStorage.setItem(storageKey, "{}");
-      localStorage.setItem(noteKey, "{}");
-      render();
-    }
-
-    function statusText(status) {
-      return {
-        keep: "保留",
-        maybe: "备选",
-        drop: "放弃",
-        unset: "未定"
-      }[status] || "未定";
-    }
-
     function shortTitle(title) {
       return title.split("：")[0].replace("板块", "");
     }
@@ -2714,10 +2557,6 @@
 
     searchInput.addEventListener("input", render);
     regionFilter.addEventListener("change", render);
-    statusFilter.addEventListener("change", render);
-    copyKeepButton.addEventListener("click", () => copyBlocks("keep"));
-    copyAllButton.addEventListener("click", () => copyBlocks("all"));
-    resetButton.addEventListener("click", resetAll);
     imageViewerClose.addEventListener("click", closeImageViewer);
     imageViewerPrev.addEventListener("click", () => moveImageViewer(-1));
     imageViewerNext.addEventListener("click", () => moveImageViewer(1));
